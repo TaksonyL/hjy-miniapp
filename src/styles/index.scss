@@ -1,0 +1,47 @@
+$color-main: #07c160;
+$color-back: #f2f2f2;   // 后景色
+$color-white: #fdfdfd;
+$color-gray: #999999;
+
+.shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05); }
+.shadow-top { box-shadow: 0 -1px -3px 0 rgba(0, 0, 0, .2), 0 -1px -2px -1px rgba(0, 0, 0, .2); }
+
+
+.text-xs { font-size: 20px; }
+.text-sm { font-size: 24px; }
+.text-base { font-size: 28px; }
+.text-lg { font-size: 32px; }
+.text-xl { font-size: 36px; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.text-color-main { color: $color-main; }
+.text-color-white { color: $color-white; }
+.text-color-gray { color: $color-gray; }
+
+.leading { line-height: 70px; }
+
+.flex { display: flex; }
+.flex-center { display: flex;align-items: center;justify-content: center; }
+.flex-between { display: flex;align-items: center;justify-content: space-between; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+
+.bg-color-back { background-color: $color-back; }
+.bg-color-main { background-color: $color-main; }
+.bg-color-white { background-color: $color-white; }
+
+.border-b { border-bottom: 1px solid #e5e5e5; }
+
+.rounded { border-radius: 24px; }
+.rounded-full { border-radius: 50%; }
+
+.inline-block { display: inline-block; }
+
+.px { padding-left: 30px;padding-right: 30px; }
+
+// 安全距离
+.safe-b {
+  padding-bottom: constant(safe-area-inset-bottom); /*兼容 IOS<11.2*/
+	padding-bottom: env(safe-area-inset-bottom); /*兼容 IOS>11.2*/
+}
