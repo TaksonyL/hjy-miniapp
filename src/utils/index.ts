@@ -1,3 +1,5 @@
+import Taro from "@tarojs/taro";
+
 /**
  * 获取格式化日期
  * @param {any} timeStamp  时间戳 默认今天
@@ -49,4 +51,26 @@ export function debounce(fn: Function, delay:number = 600):() => void {
       fn(...args)
     }, delay)
   }
+}
+
+/**
+ * 拟态对话框
+ * @param param0 
+ */
+export function showModel ({ title, content, success, showCancel }: {
+  title?: string
+  content?: string
+  success?: Function
+  showCancel?: boolean
+}) {
+  Taro.showModal({
+    title: title || '提示',
+    content: content || '提示信息',
+    showCancel: showCancel || false,
+    success(res) {
+      if (res.confirm && success) {
+        success()
+      }
+    }
+  })
 }

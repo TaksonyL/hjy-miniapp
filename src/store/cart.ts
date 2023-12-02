@@ -61,6 +61,11 @@ export const useCartStore = defineStore("cart", () => {
     Taro.setStorageSync('CART', JSON.stringify([...cart.value.values()]))
   }
 
+  // 清空购物车
+  const cartClear = () => {
+    cart.value.clear()
+  }
+
   onMounted(() => {
     const arr = Taro.getStorageSync('CART')
     if (arr) {
@@ -75,6 +80,7 @@ export const useCartStore = defineStore("cart", () => {
     cartLen,
     cartAdd,
     cartNum,
-    cartDel
+    cartDel,
+    cartClear
   }
 })

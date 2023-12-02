@@ -25,7 +25,7 @@
           <nut-empty v-if="cartStore.cartList.length === 0" image="empty" description="购物车暂无商品！"></nut-empty>
         </view>
 
-        <view class="cart-bar shadow-top px text-right flex-between">
+        <view class="cart-bar shadow-t px text-right flex-between">
           <view>商品总数：{{ cartStore.cartLen }}</view>
           <nut-button type="success" style="width: 120px;" @click="submit">确认</nut-button>
         </view>
@@ -43,6 +43,7 @@ import Navbar from '@/components/Navbar/index.vue'
 import { GoodsItem } from '@/types/index'
 import { useCartStore } from '@/store/cart';
 import Taro from '@tarojs/taro';
+import { getChannelList } from '@/api/machine';
 
 const goodslist = ref<GoodsItem[]>([
   {
@@ -76,6 +77,19 @@ const goodslist = ref<GoodsItem[]>([
     stock: 10
   }
 ])
+
+const getData = () => {
+  getChannelList({}).then(res => {
+    // console.log('channel list ===', res)
+    goodslist.value = res.data.map(item => ({
+      id: item.channel_id,
+      name: item.channel_code,
+      img: item.channel_code,
+      stock: item.channel_stock
+    }))
+  })
+}
+getData()
 
 const cartStore = useCartStore()
 const cartAdd = (index: number) => {

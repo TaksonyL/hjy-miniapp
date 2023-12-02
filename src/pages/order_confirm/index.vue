@@ -15,10 +15,10 @@
 
     <view class="toolbar-block"></view>
     
-    <view class="toolbar safe-b shadow-top text-right bg-color-white">
+    <view class="toolbar safe-b shadow-t text-right bg-color-white">
       <view class="toolbar-wrap px flex-between">
         <view>商品总数：{{ cartStore.cartLen }}</view>
-        <nut-button type="success" style="width: 120px;">确认</nut-button>  
+        <nut-button type="success" style="width: 120px;" @click="submit">确认</nut-button>  
       </view>
     </view>
   </view>
@@ -29,9 +29,28 @@ import Navbar from '@/components/Navbar/index.vue'
 import goodsItem from '@/components/GoodsItem/index.vue'
 import Cell from './cell.vue'
 import { useCartStore } from '@/store/cart';
+import { createFreeOrder } from '@/api/order';
+import Taro from '@tarojs/taro';
 
 const cartStore = useCartStore()
-console.log('cart ===', cartStore)
+
+const submit = () => {
+  const cart = cartStore.cartList.map(item => {
+    return {
+      channel_id: item.id,
+      goods_num: item.num
+    }
+  })
+  createFreeOrder({
+    goodsList: cart
+  }).then(res => {
+    console.log('order ===', res)
+    cartStore.cartClear()
+    Taro.redirectTo({
+      url: '/pages/order_status/index'
+    })
+  })
+}
 </script>
 
 <style lang="scss">

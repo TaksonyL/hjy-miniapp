@@ -6,7 +6,7 @@
     <view class="leading text-base">{{ item.name }}</view>
     <view class="flex-between text-sm">
       <view class="text-color-gray">库存：{{ item.stock }}</view>
-      <nut-button type="success" size="mini" @click="cartAdd">免费领取</nut-button>
+      <nut-button type="primary" size="mini" @click="cartAdd">免费领取</nut-button>
     </view>
     
   </view>

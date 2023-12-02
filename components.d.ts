@@ -13,5 +13,6 @@ declare module '@vue/runtime-core' {
     NutButton: typeof import('@nutui/nutui-taro')['Button']
     NutEmpty: typeof import('@nutui/nutui-taro')['Empty']
     NutPopup: typeof import('@nutui/nutui-taro')['Popup']
+    NutProgress: typeof import('@nutui/nutui-taro')['Progress']
   }
 }

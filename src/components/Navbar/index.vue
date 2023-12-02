@@ -3,7 +3,7 @@
     <view class="navbar-wrap" :class="themeStyles" :style="{ paddingTop: statusHeight + 'px' }">
       <view class="navbar-content text-center text-lg">{{ title }}</view>
       <view v-if="(pages.length > 1) && isBack" class="navbar-back px flex-center">
-        <IconFont name="rect-left" color="#666" @click="goBack"></IconFont>
+        <IconFont name="rect-left" style="opacity: .7;" @click="goBack"></IconFont>
       </view>
     </view>
 
@@ -18,8 +18,8 @@ import { computed } from 'vue';
 
 export interface Props {
   title: string,
-  theme: 'base' | 'transparent',
-  isBack: boolean
+  theme?: 'base' | 'transparent' | 'white',
+  isBack?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -38,10 +38,15 @@ const themeStyles = computed(() => {
   switch (props.theme) {
     case 'transparent':
       styles.bgColor = ''
+      styles.textColor = 'text-color-white'
+      styles.shadow = ''
+      break;
+    case 'white':
+      styles.bgColor = ''
+      styles.textColor = 'text-color-white'
       styles.shadow = ''
       break;
   }
-  console.log('styles ===', styles)
 
   let stylesText = ''
   for (const key in styles) {

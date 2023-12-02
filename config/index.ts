@@ -42,6 +42,7 @@ const config = {
     prebundle: { enable: false }
   },
   sass:{
+    resource: ['src/styles/variable.scss'],
     data: `@import "@nutui/nutui-taro/dist/styles/variables.scss";`,
   },
   mini: {
