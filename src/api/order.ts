@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { CreateOrder, CreateFreeOrder } from '@/types/api'
+import { CreateOrder, CreateFreeOrder, ListenScoreOrder } from '@/types/api'
 
 /**
  * 创建支付分订单
@@ -20,10 +20,28 @@ export function payScoreOrder (data) {
 }
 
 /**
+ * 监听充电宝租借订单结果
+ * @param data 
+ * @returns 
+ */
+export function listenScoreOrder (data: ListenScoreOrder.Options) {
+  return request<ListenScoreOrder.Response>('/miniprogram/order/monitorPbo', data, false)
+}
+
+/**
  * 免费领取生成订单并出货
  * @param data 
  * @returns 
  */
 export function createFreeOrder (data: CreateFreeOrder.Options) {
   return request<CreateFreeOrder.Response>('/miniprogram/order/useFree', data)
+}
+
+/**
+ * 监听免费领取订单结果
+ * @param data 
+ * @returns 
+ */
+export function listenFreeOrder (data: { order_id: number }) {
+  return request('/miniprogram/order/monitorOrder', data, false)
 }

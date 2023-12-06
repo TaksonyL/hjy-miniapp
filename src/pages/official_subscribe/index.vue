@@ -58,7 +58,7 @@ const goArticleDetail = (item: OfficialArticleItem, id: string) => {
   const title = item.title
   const img = encodeURIComponent(item.thumb_url)
   Taro.navigateTo({
-    url: `/pages/official_article/index?id=${id}&title=${title}&img=${img}&url=${encodeURIComponent(url)}&share=true`
+    url: `/pages/official_article/index?id=${id}&title=${title}&img=${img}&url=${encodeURIComponent(url)}`
   })
 }
 </script>

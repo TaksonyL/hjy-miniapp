@@ -73,7 +73,7 @@ useLoad(() => {
 useDidShow(() => {
   if (commonStore.scene === 1155) {
     Taro.redirectTo({
-      url: `/pages/official_article/index?id=${shareInfo.id}&title=${shareInfo.title}&img=${encodeURIComponent(shareInfo.img)}&url=${encodeURIComponent(shareInfo.path)}`
+      url: `/pages/official_article/index?id=${shareInfo.id}&title=${shareInfo.title}&img=${encodeURIComponent(shareInfo.img)}&url=${encodeURIComponent(shareInfo.path)}&share=true`
     })
   }
 })

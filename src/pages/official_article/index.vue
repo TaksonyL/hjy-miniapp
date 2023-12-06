@@ -1,6 +1,6 @@
 <template>
   <view class="official-article-container">
-    <web-view :src='webUrl' />
+    <!-- <web-view :src='webUrl' /> -->
 
     <cover-view v-if="!isShare" class="toolbar px shadow-t bg-color-white safe-b">
       <cover-view class="toolbar-wrap flex-center">
@@ -25,7 +25,7 @@ let shareInfo = {
   img: ''
 }
 
-const isShare = ref(false)  // 是否为分享页面
+const isShare = ref(true)  // 是否为分享页面
 useLoad(() => {
   const { id, url, title, img, share } = router.params
   if (url) {
@@ -34,7 +34,9 @@ useLoad(() => {
     shareInfo.title = decodeURIComponent(title || '公众号文章')
     shareInfo.id = id || ''
 
-    isShare.value = !!share
+    setTimeout(() => {
+      isShare.value = !!share
+    }, 500)
   } else {
     Taro.showToast({
       title: '参数错误',
@@ -56,7 +58,7 @@ const goShow = () => {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 999999;
     width: 100%;
     box-sizing: border-box;
     .toolbar-wrap {

@@ -5,6 +5,16 @@ export namespace CreateOrder {
   }
 }
 
+export namespace ListenScoreOrder {
+  export interface Options {
+    pbo_id: number
+  }
+
+  export interface Response {
+    status: 1 | 2 | 3
+  }
+}
+
 export namespace CreateFreeOrder {
   export interface Options {
     goodsList: {

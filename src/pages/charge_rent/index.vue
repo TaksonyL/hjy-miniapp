@@ -47,12 +47,12 @@ import { createOrder, payScoreOrder } from '@/api/order';
 const rent = () => {
   createOrder({}).then(res => {
     console.log('test ===', res)
-    payScoreOrder({}).then(res => {
-      console.log('test ===', res)
-    })
-    // Taro.redirectTo({
-    //   url: '/pages/charge_loading/index'
+    // payScoreOrder({}).then(res => {
+    //   console.log('test ===', res)
     // })
+    Taro.redirectTo({
+      url: '/pages/charge_loading/index'
+    })
   })
 }
 
