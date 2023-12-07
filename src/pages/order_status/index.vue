@@ -55,7 +55,17 @@ const messageInfo = computed(() => {
 usePollingTask(async () => {
   const res = await listenFreeOrder({ order_id: 7 })
   console.log('order ===', res)
-  return false
+  switch(res.data.order_out_status) {
+    case 0:
+    case 6:
+      return true
+    case 1:
+      type.value = MessageType.SUCCESS
+      return false
+    default:
+      type.value = MessageType.FAIL
+      return false
+  }
 })
 </script>
 

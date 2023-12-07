@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/official_subscribe/index',
     'pages/official_article/index',
     'pages/official_share/index',
+    'pages/official_qrcode/index',
     'pages/order_confirm/index',
     'pages/order_status/index',
     'pages/goods_list/index',

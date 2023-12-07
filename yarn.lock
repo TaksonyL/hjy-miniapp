@@ -12539,6 +12539,11 @@ ws@^8.13.0, ws@^8.4.2:
   resolved "https://registry.npmmirror.com/ws/-/ws-8.14.2.tgz#6c249a806eb2db7a20d26d51e7709eab7b2e6c7f"
   integrity sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==
 
+wxmp-qrcode@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmmirror.com/wxmp-qrcode/-/wxmp-qrcode-2.0.3.tgz#2c080390d45d3c35dfc2ac71916c5afcd1d05710"
+  integrity sha512-yVynLqMaBPWJiYtHBYgR7opj2tZtILO74baKUXyyrxtkmCRI9sCK/b+ZUx8C/Iu9F6vIvt8gFhLKKC/uIuRhzA==
+
 x-is-string@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmmirror.com/x-is-string/-/x-is-string-0.1.0.tgz#474b50865af3a49a9c4657f05acd145458f77d82"

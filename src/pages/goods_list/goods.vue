@@ -1,7 +1,7 @@
 <template>
   <view class="goods-wrap bg-color-white rounded">
-    <view>
-      <image src="@/assets/product.png"></image>
+    <view class="goods-img">
+      <ImgWrap :src="item.img" />
     </view>
     <view class="leading text-base">{{ item.name }}</view>
     <view class="flex-between text-sm">
@@ -13,6 +13,7 @@
 </template>
 
 <script lang="ts" setup>
+import ImgWrap from '@/components/ImgWrap/index.vue'
 import { GoodsItem } from '@/types';
 
 export interface Props {
@@ -37,7 +38,7 @@ const cartAdd = () => {
   box-sizing: border-box;
   margin-bottom: 30px;
 
-  image {
+  .goods-img {
     width: 100%;
     height: 300px;
   }

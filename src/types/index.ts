@@ -11,6 +11,8 @@ export interface MachineInfo {
   machine_lat: string
   machine_lng: string
   machine_name: string
+  machine_car_limit: number
+  machine_channel_limit: number
 }
 
 // 货道信息
@@ -19,11 +21,16 @@ export interface Channel {
   channel_code: string
   channel_stock: number
   channel_status: 1
+  channel_goods_name: string
+  channel_goods_pic: string
 }
 
 // 用户信息
 export interface UserInfo {
   user_id: number
+  user_subscribe: 0 | 1 | 2,
+  user_of_id: number,
+  of_subscrible: 0 | 1 | 2,   // 0 - 未关注，1 - 已关注，2 - 取消关注
 }
 
 // 公众号文章信息

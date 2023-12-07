@@ -1,22 +1,22 @@
 <template>
   <view class="goods-item-wrap flex">
-    <view style="margin-right: 15px">
-      <image style="width: 80px;height: 80px;" src="@/assets/product.png"></image>
+    <view style="margin-right: 15px;width: 80px;height: 80px;">
+      <ImgWrap :src="item.img" />
     </view>
     <view style="padding-top: 5px;">{{ item.name }}</view>
     <view class="goods-item-num flex-center">
       <!-- <nut-input-number v-model="num" :min="0" :max="item.stock" readonly @change="onNumChange" /> -->
       <IconFont name="minus" @click="numMinus"></IconFont>
-      <view class="goods-item-num-value bg-color-back text-center text-sm">{{ num }}</view>
-      <IconFont :class="{ 'text-color-gray': num >= numMax }" name="plus" @click="numPlus"></IconFont>
+      <view class="goods-item-num-value bg-color-back text-center text-sm">{{ item.num }}</view>
+      <IconFont :class="{ 'text-color-gray': item.num >= numMax }" name="plus" @click="numPlus"></IconFont>
     </view>
   </view>
 </template>
 
 <script lang="ts" setup>
+import ImgWrap from '@/components/ImgWrap/index.vue'
 import { CartItem } from '@/store/cart';
-import { ref, watch } from 'vue';
-import { debounce } from '@/utils';
+import { throttle } from '@/utils';
 import { IconFont } from '@nutui/icons-vue-taro';
 import Taro from '@tarojs/taro';
 
@@ -31,16 +31,15 @@ const emit = defineEmits<{
 }>()
 
 
-const num = ref(props.item.num)
 const numMax = props.item.stock
 
 const numPlus = () => {
-  if (num.value >= numMax) return
-  num.value++
+  if (props.item.num >= numMax) return
+  numChange(props.item.num + 1)
 }
 
 const numMinus = () => {
-  if (num.value <= 1) {
+  if (props.item.num <= 1) {
     Taro.showModal({
       title: '提示',
       content: '是否移除商品？',
@@ -52,19 +51,11 @@ const numMinus = () => {
     })
     return
   }
-  num.value--
+  numChange(props.item.num - 1)
 }
 
-const onNumChange = debounce(() => {
-  emit('numChange', num.value)
-})
-
-watch(num, () => {
-  onNumChange()
-})
-
-watch(() => props.item.num, (newVal) => {
-  if (newVal !== num.value) num.value = newVal
+const numChange = throttle((number: number) => {
+  emit('numChange', number)
 })
 </script>
 

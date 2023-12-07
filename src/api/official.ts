@@ -2,6 +2,15 @@ import request from '@/utils/request'
 import { GetOfficialArticles } from '@/types/api'
 
 /**
+ * 获取公众号带参数二维码
+ * @param data 
+ * @returns 
+ */
+export function getOfficialQrcode (data: {}) {
+  return request<string>('/miniprogram/wx/getQrCode', data)
+}
+
+/**
  * 获取公众号已发布文章
  * @param data 
  * @returns 

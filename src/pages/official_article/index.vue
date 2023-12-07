@@ -1,6 +1,6 @@
 <template>
   <view class="official-article-container">
-    <!-- <web-view :src='webUrl' /> -->
+    <web-view :src='webUrl' />
 
     <cover-view v-if="!isShare" class="toolbar px shadow-t bg-color-white safe-b">
       <cover-view class="toolbar-wrap flex-center">

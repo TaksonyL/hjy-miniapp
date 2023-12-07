@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="safe-b">
     <Navbar title="确认订单" />
 
     <view class="cell-group">
@@ -18,7 +18,7 @@
     <view class="toolbar safe-b shadow-t text-right bg-color-white">
       <view class="toolbar-wrap px flex-between">
         <view>商品总数：{{ cartStore.cartLen }}</view>
-        <nut-button type="success" style="width: 120px;" @click="submit">确认</nut-button>  
+        <nut-button type="primary" style="width: 120px;" @click="submit">确认</nut-button>  
       </view>
     </view>
   </view>

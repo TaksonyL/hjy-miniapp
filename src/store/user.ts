@@ -43,6 +43,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     token,
+    userInfo,
     login,
     getToken
   }

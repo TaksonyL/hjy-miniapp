@@ -4,12 +4,15 @@
 
     <view class="share-wrap">
       <view class="share-item bg-color-white rounded shadow">
-        <view class="text-lg">{{ shareInfo.title }}</view>
+        <view class="share-header">
+          <image src="@/assets/article-header.png" style="width: 100%;" mode="widthFix" />
+        </view>
+        <view class="share-text text-lg">{{ shareInfo.title }}</view>
         <image class="rounded-sm" :src="shareInfo.img" />
       </view>
 
-      <view v-if="!isShare" class="text-center">
-        <nut-button type="primary" shape="square" :disabled="!shareAble" @click="goFree">免费领取</nut-button>  
+      <view v-if="!isShare && shareAble" class="text-center">
+        <nut-button type="primary" shape="square" @click="goFree">免费领取</nut-button>  
       </view>
     </view>
   </view>
@@ -82,10 +85,18 @@ useDidShow(() => {
 <style lang="scss">
 .share-wrap {
   .share-item {
-    margin: 15vh auto 60px;
+    margin: 20vh auto 60px;
     width: 600px;
     padding: 30px;
+    padding-top: 40px;
     box-sizing: border-box;
+    position: relative;
+    .share-header {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: -200px;
+    }
     image {
       width: 100%;
       height: 360px;

@@ -25,3 +25,13 @@ export namespace CreateFreeOrder {
 
   export interface Response {}
 }
+
+export namespace ListenFreeOrder {
+  export interface Options {
+    order_id: number
+  }
+
+  export interface Response {
+    order_out_status: 0 | 1 | 2 | 3 | 4 | 5 | 6 
+  }
+}

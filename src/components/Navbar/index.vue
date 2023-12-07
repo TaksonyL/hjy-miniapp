@@ -2,8 +2,9 @@
   <view class="navbar-container">
     <view class="navbar-wrap" :class="themeStyles" :style="{ paddingTop: statusHeight + 'px' }">
       <view class="navbar-content text-center text-lg">{{ title }}</view>
-      <view v-if="(pages.length > 1) && isBack" class="navbar-back px flex-center">
-        <IconFont name="rect-left" style="opacity: .7;" @click="goBack"></IconFont>
+      <view v-if="isBack" class="navbar-back px flex-center">
+        <IconFont v-if="pages.length > 1" name="rect-left" style="opacity: .7;" @click="goBack"></IconFont>
+        <IconFont v-else-if="pages.length === 1" name="home" style="opacity: .7;" @click="goHome"></IconFont>
       </view>
     </view>
 
@@ -64,7 +65,11 @@ const goBack = () => {
     }
   })
 }
-console.log('page ===', pages)
+const goHome = () => {
+  Taro.redirectTo({
+    url: '/pages/index/index'
+  })
+}
 
 const statusHeight = Taro.getSystemInfoSync().statusBarHeight
 </script>
@@ -78,6 +83,7 @@ $navbar-height: 90px;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 999;
     box-sizing: border-box;
 
     .navbar-back {

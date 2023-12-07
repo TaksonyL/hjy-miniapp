@@ -2,9 +2,14 @@
   <view class="">
     <Navbar title="关注公众号" />
 
-    <official-account></official-account>
+    <view class="text-wrap text-lg text-center">
+      <view>分享公众号文章至朋友圈</view>
+      <view>获取免费领取额度</view>
+    </view>
 
     <view class="px" style="padding-top: 10px;">
+
+      <nut-empty v-if="articlesList.length === 0" description="暂无商品信息"></nut-empty>
 
       <view v-for="(list, index) in articlesList" :key="index"
        class="article-list bg-color-white rounded-sm overflow-hidden shadow">
@@ -22,24 +27,19 @@
       
     </view>
 
-    <view style="padding-top: 20vh;" class="text-center">
+    <!-- <view style="padding-top: 20vh;" class="text-center">
       <nut-button type="primary" @click="subscribe">关注公众号</nut-button>
-    </view>
+    </view> -->
   </view>
 </template>
 
 <script lang="ts" setup>
 import { getOfficialArticles } from '@/api/official';
+import { getFreeQuota } from '@/api/order';
 import Navbar from '@/components/Navbar/index.vue'
 import { OfficialArticle, OfficialArticleItem } from '@/types';
-import Taro from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import { ref } from 'vue';
-
-const subscribe = () => {
-  Taro.navigateTo({
-    url: "/pages/goods_list/index"
-  })
-}
 
 const articlesList = ref<OfficialArticle[]>([])
 const getArticles = () => {
@@ -61,9 +61,20 @@ const goArticleDetail = (item: OfficialArticleItem, id: string) => {
     url: `/pages/official_article/index?id=${id}&title=${title}&img=${img}&url=${encodeURIComponent(url)}`
   })
 }
+
+useDidShow(() => {
+  // 进入时检查免费领取额度
+  getFreeQuota({}).then(res => {
+    console.log('quota ===', res)
+  })
+})
 </script>
 
 <style lang="scss">
+.text-wrap {
+  padding: 30px 0;
+}
+
 .article-list {
   .article-item {
     &:nth-child(1) {

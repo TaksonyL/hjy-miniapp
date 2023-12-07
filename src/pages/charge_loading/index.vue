@@ -35,8 +35,7 @@ usePollingTask(async () => {
     progressValue.value = 100
     return false
   }
-  // return true
-  return false
+  return true
 })
 </script>
 

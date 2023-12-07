@@ -1,6 +1,6 @@
 <template>
   <view class="flex flex-col" style="height: 100vh;">
-    <Navbar :title="machineInfo?.machine_name || '设备名称'" />
+    <Navbar :title="machineInfo?.machine_name || '设备名称'" :isBack="false" />
 
     <view class="flex-center flex-col" style="height: 100%;padding-bottom: 10vh;">
       <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow" style="margin-bottom: 20px;"
@@ -9,7 +9,7 @@
         <view>充电宝租借</view>
       </view>
       <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow"
-        @click="goPage('/pages/official_subscribe/index')">
+        @click="goPage('/pages/official_qrcode/index')">
         <image src="@/assets/icon-gift.png" mode="heightFix" />
         <view>免费领取礼品</view>
       </view>  
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { checkLocation, getMachine } from '@/api/machine';
 import Navbar from '@/components/Navbar/index.vue'
+import { useCartStore } from '@/store/cart';
 import { useUserStore } from '@/store/user';
 import { MachineInfo } from '@/types';
 import { showModel } from '@/utils';
@@ -27,6 +28,7 @@ import Taro from '@tarojs/taro';
 import { ref } from 'vue';
 
 const userStore = useUserStore()
+const cartStore = useCartStore()
 
 const goPage = async (url: string) => {
   Taro.navigateTo({
@@ -38,6 +40,8 @@ const machineInfo = ref<MachineInfo | null>(null)
 const getMachineData = () => {
   getMachine({}).then(res => {
     machineInfo.value = res.data
+    cartStore.cartLimit = res.data.machine_car_limit
+    cartStore.channelLimit = res.data.machine_channel_limit
     getLocation()
   })
 }
@@ -48,7 +52,7 @@ userStore.login().then(() => {
 })
 
 let location = { lon: 0, lat: 0 }
-const maxDistance = 200000
+const maxDistance = 200000    // 限制距离
 const getLocation = async () => {
   Taro.getLocation({
     type: 'wgs84',

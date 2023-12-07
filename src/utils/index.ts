@@ -54,6 +54,28 @@ export function debounce(fn: Function, delay:number = 600):() => void {
 }
 
 /**
+ * 节流函数
+ * @param func 
+ * @param delay 
+ * @returns 
+ */
+export function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number = 600
+): T {
+  let lastInvokeTime = 0;
+
+  return function (this: any, ...args: Parameters<T>) {
+    const now = Date.now();
+
+    if (now - lastInvokeTime >= delay) {
+      lastInvokeTime = now;
+      func.apply(this, args);
+    }
+  } as T;
+}
+
+/**
  * 拟态对话框
  * @param param0 
  */
