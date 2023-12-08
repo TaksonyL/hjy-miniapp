@@ -61,13 +61,13 @@ const pages = Taro.getCurrentPages()
 const goBack = () => {
   Taro.navigateBack({
     fail() {
-      Taro.redirectTo({ url: '/pages/index/index' })
+      Taro.redirectTo({ url: '/pages/login/index' })
     }
   })
 }
 const goHome = () => {
   Taro.redirectTo({
-    url: '/pages/index/index'
+    url: '/pages/login/index'
   })
 }
 

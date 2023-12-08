@@ -1,6 +1,6 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index',
+    'pages/login/index',
     'pages/charge_rent/index',
     'pages/charge_loading/index',
     'pages/official_subscribe/index',
