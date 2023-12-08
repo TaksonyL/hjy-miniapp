@@ -21,10 +21,11 @@
 import { checkLocation, getMachine } from '@/api/machine';
 import Navbar from '@/components/Navbar/index.vue'
 import { useCartStore } from '@/store/cart';
+import { useCommonStore } from '@/store/common';
 import { useUserStore } from '@/store/user';
 import { MachineInfo } from '@/types';
 import { showModel } from '@/utils';
-import Taro from '@tarojs/taro';
+import Taro, { useLoad } from '@tarojs/taro';
 import { ref } from 'vue';
 
 const userStore = useUserStore()
@@ -45,11 +46,6 @@ const getMachineData = () => {
     getLocation()
   })
 }
-
-
-userStore.login().then(() => {
-  getMachineData()
-})
 
 let location = { lon: 0, lat: 0 }
 const maxDistance = 200000    // 限制距离
@@ -84,6 +80,24 @@ const getLocation = async () => {
     }
   })
 }
+
+const commonStore = useCommonStore()
+useLoad((options) => {
+  if (options.machine_id) {
+    commonStore.machineId = Number(options.machine_id)
+    userStore.login().then(() => {
+      getMachineData()
+    })
+  } else {
+    showModel({
+      title: '提示',
+      content: '非有效设备',
+      success() {
+        Taro.exitMiniProgram()
+      }
+    })
+  }
+})
 </script>
 
 <style lang="scss">

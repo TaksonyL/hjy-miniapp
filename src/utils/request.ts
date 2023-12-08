@@ -1,6 +1,6 @@
 import settings from "@/settings"
+import { useCommonStore } from "@/store/common"
 import { useUserStore } from "@/store/user"
-// import { useUserStore } from "@/stores/user"
 import Taro from "@tarojs/taro"
 
 type methodType = 'POST' | 'GET'
@@ -40,7 +40,7 @@ export default function request<T = any>(api: string, data: any, loading: boolea
   // if (userStore.openType > 0) data.inType = userStore.openType
 
   //@ts-ignore
-  data.machine_id = 1
+  data.machine_id = useCommonStore().machineId
 
   return new Promise((resolve, reject) => {
     Taro.request<Response<T>>({
