@@ -8,7 +8,7 @@
       </view>
     </view>
 
-    <view class="navbar-block" :style="{ paddingTop: statusHeight + 'px' }"></view>
+    <view v-if="isBlock" class="navbar-block" :style="{ paddingTop: statusHeight + 'px' }"></view>
   </view>
 </template>
 
@@ -20,13 +20,15 @@ import { computed } from 'vue';
 export interface Props {
   title: string,
   theme?: 'base' | 'transparent' | 'white',
-  isBack?: boolean
+  isBack?: boolean,
+  isBlock?: boolean,  // 占位模块
 }
 
 const props = withDefaults(defineProps<Props>(), {
   title: "",
   theme: 'base',
-  isBack: true
+  isBack: true,
+  isBlock: true
 })
 
 // 主题
@@ -61,13 +63,13 @@ const pages = Taro.getCurrentPages()
 const goBack = () => {
   Taro.navigateBack({
     fail() {
-      Taro.redirectTo({ url: '/pages/login/index' })
+      Taro.redirectTo({ url: '/pages/index/index' })
     }
   })
 }
 const goHome = () => {
   Taro.redirectTo({
-    url: '/pages/login/index'
+    url: '/pages/index/index'
   })
 }
 

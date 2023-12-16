@@ -96,3 +96,26 @@ export function showModel ({ title, content, success, showCancel }: {
     }
   })
 }
+
+/**
+ * 位置获取
+ */
+export function getLocation (): Promise<Taro.getLocation.SuccessCallbackResult> {
+  return new Promise((resolve, reject) => {
+    Taro.getLocation({
+      type: 'wgs84',
+      success: async (res) => {
+        resolve(res)
+      },
+      fail(err) {
+        reject(err)
+        showModel({
+          content: '请先授予位置权限，用于核实是否位于设备附近！',
+          success() {
+            Taro.openSetting()
+          }
+        })
+      }
+    })  
+  })
+}

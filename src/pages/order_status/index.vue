@@ -24,7 +24,7 @@ enum MessageType {
   FAIL
 }
 
-const type = ref<MessageType>(MessageType.LOADING)
+const type = ref<MessageType>(MessageType.SUCCESS)
 
 const messageInfo = computed(() => {
   switch(type.value) {
@@ -40,7 +40,7 @@ const messageInfo = computed(() => {
         icon: 'checked',
         size: '80',
         color: '#07c160',
-        content: '领取成功，等待出货!'
+        content: '出货成功!'
       }
     case MessageType.FAIL:
       return {
@@ -52,21 +52,21 @@ const messageInfo = computed(() => {
   }
 })
 
-usePollingTask(async () => {
-  const res = await listenFreeOrder({ order_id: 7 })
-  console.log('order ===', res)
-  switch(res.data.order_out_status) {
-    case 0:
-    case 6:
-      return true
-    case 1:
-      type.value = MessageType.SUCCESS
-      return false
-    default:
-      type.value = MessageType.FAIL
-      return false
-  }
-})
+// usePollingTask(async () => {
+//   const res = await listenFreeOrder({ order_id: 7 })
+//   console.log('order ===', res)
+//   switch(res.data.order_out_status) {
+//     case 0:
+//     case 6:
+//       return true
+//     case 1:
+//       type.value = MessageType.SUCCESS
+//       return false
+//     default:
+//       type.value = MessageType.FAIL
+//       return false
+//   }
+// })
 </script>
 
 <style lang="scss">

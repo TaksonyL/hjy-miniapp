@@ -1,6 +1,6 @@
 <template>
   <view class="flex flex-col" style="height: 100vh;">
-    <Navbar :title="machineInfo?.machine_name || '设备名称'" :isBack="false" />
+    <Navbar :title="machineInfo?.machine_name || '设备名称'"/>
 
     <view class="flex-center flex-col" style="height: 100%;padding-bottom: 10vh;">
       <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow" style="margin-bottom: 20px;"
@@ -88,6 +88,25 @@ useLoad((options) => {
     userStore.login().then(() => {
       getMachineData()
     })
+  } else if (options.q) {
+    try {
+      const param = decodeURIComponent(options.q).split('?')[1]
+      const machineId = param.split('=')[1]
+
+      commonStore.machineId = Number(machineId)
+      userStore.login().then(() => {
+        getMachineData()
+      })  
+    } catch (err) {
+      showModel({
+        title: '提示',
+        content: '非有效设备',
+        success() {
+          Taro.exitMiniProgram()
+        }
+      })
+    }
+    
   } else {
     showModel({
       title: '提示',

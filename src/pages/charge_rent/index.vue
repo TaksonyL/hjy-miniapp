@@ -8,7 +8,7 @@
 
     <view v-if="rule" class="rent-wrap bg-color-white px shadow-t">
       <view class="safe-b">
-        <view class="text-sm px" style="padding-bottom: 20px;padding-top: 10px;">
+        <view class="text-sm" style="padding-bottom: 20px;padding-top: 10px;">
           <view class="text-justify" style="margin-bottom: 15px;color: #777;">
             {{ rule.desc }}
           </view>
@@ -22,14 +22,20 @@
           </view>
           <view class="rent-text-item">
             <IconFont class="rent-text-icon" name="date" />
-            <view>每{{ rule.overdue_cycle }}小时收费{{ rule.overdue_amount }}元，每{{ rule.cycle }}天内封顶上限{{ rule.charge_limit }}元</view>
+            <view>{{ Number(rule.overdue_amount) }}元/{{ rule.overdue_cycle }}小时，每{{ rule.cycle *24 }}小时封顶{{ Number(rule.charge_limit) }}元，总封顶{{ Number(rule.charge_limit_continuous) }}元</view>
           </view>
         </view>
-        <view class="shadow bg-color-main text-color-white text-center shadow"
-          style="padding: 5px; border-radius: 24px;" @click="rent">
-          <view>申请免押金租借</view>
-          <view class="text-xs">(微信支付分550分及以上有经济会免押金)</view>
-        </view>  
+        <view class="shadow text-color-white text-center shadow"
+          style="padding: 5px; border-radius: 24px; line-height: 35px;background-color: #07c160;" @click="rent">
+          <!-- <view></view> -->
+          免押金租借
+          <!-- <view class="text-xs">(微信支付分550分及以上有经济会免押金)</view> -->
+        </view>
+        <view class="pay-score-wrap flex-center">
+          <image src="@/assets/pay-score-icon.png"></image>
+          <text>微信支付分|550分及以上优享</text>
+        </view>
+        <view class="text-center text-sm" style="color: #666;padding-top: 5px;">申请租借代表您已同意<text style="color: #07c160;">《委托扣款授权书》</text></view>
       </view>
     </view>
   </view>
@@ -89,6 +95,17 @@ getRule()
       margin-right: 20px;
       border-right: 1px solid #ccc;
     }
+  }
+}
+
+.pay-score-wrap {
+  font-size: 24px;
+  color: #666;
+  padding-top: 10px;
+  image {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
   }
 }
 </style>
