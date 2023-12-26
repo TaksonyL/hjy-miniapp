@@ -7,7 +7,5 @@ import { LoginApi } from '@/types/api'
  * @returns 
  */
 export function userLogin (data: LoginApi.Options) {
-  //@ts-ignore
-  data.machine_id = 1
   return request<LoginApi.Response>('/miniprogram/wx/code2Session', data)
 }

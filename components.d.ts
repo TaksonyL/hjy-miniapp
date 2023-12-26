@@ -16,5 +16,7 @@ declare module '@vue/runtime-core' {
     NutNoticebar: typeof import('@nutui/nutui-taro')['Noticebar']
     NutPopup: typeof import('@nutui/nutui-taro')['Popup']
     NutProgress: typeof import('@nutui/nutui-taro')['Progress']
+    NutTag: typeof import('@nutui/nutui-taro')['Tag']
+    Tag: typeof import('./src/components/Tag/index.vue')['default']
   }
 }

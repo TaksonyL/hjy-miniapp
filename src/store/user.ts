@@ -36,8 +36,12 @@ export const useUserStore = defineStore('user', () => {
     return result
   }
 
-  const getToken = () => {
-    token.value = Taro.getStorageSync('TOKEN')
+  const getToken = async () => {
+    // token.value = Taro.getStorageSync('TOKEN')
+    if (!token.value) {
+      const result = await login()
+      token.value = result.data.token
+    }
     return token.value
   }
 

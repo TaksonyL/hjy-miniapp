@@ -6,6 +6,16 @@ export namespace GetMachine {
   }
 }
 
+export namespace GetMachineNear {
+  export interface Options {
+    lat: string,
+    lng: string,
+    pageNum: number
+  }
+
+  export interface Response extends MachineInfo {}
+}
+
 export namespace GetChannelList {
   export interface Options {}
 

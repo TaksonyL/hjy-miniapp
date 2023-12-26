@@ -46,6 +46,8 @@ page {
 .inline-block { display: inline-block; }
 
 .px { padding-left: 30px;padding-right: 30px; }
+.py { padding-top: 30px;padding-bottom: 30px; }
+.py-sm { padding-top: 20px;padding-bottom: 20px; }
 
 // 安全距离
 .safe-b {

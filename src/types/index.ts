@@ -9,7 +9,7 @@ export interface GoodsItem {
 export interface MachineInfo {
   machine_id: number
   machine_lat: string
-  machine_lng: string
+  machine_lon: string
   machine_name: string
   machine_car_limit: number
   machine_channel_limit: number

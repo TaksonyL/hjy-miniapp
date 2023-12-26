@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { GetChannelList, GetMachine, CheckLocation, GetLeaseRule } from '@/types/api'
+import { GetChannelList, GetMachine, CheckLocation, GetLeaseRule, GetMachineNear } from '@/types/api'
 
 /**
  * 获取设备信息
@@ -8,6 +8,15 @@ import { GetChannelList, GetMachine, CheckLocation, GetLeaseRule } from '@/types
  */
 export function getMachine (data: {}) {
   return request<GetMachine.Response>('/miniprogram/machine/getMachine', data)
+}
+
+/**
+ * 获取附近设备
+ * @param data 
+ * @returns 
+ */
+export function getMachineNear (data: GetMachineNear.Options) {
+  return request<GetMachineNear.Response[]>('/miniprogram/machine/getNearby', data)
 }
 
 /**

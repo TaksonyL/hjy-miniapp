@@ -11,6 +11,7 @@ export default defineAppConfig({
     'pages/order_confirm/index',
     'pages/order_status/index',
     'pages/goods_list/index',
+    'pages/order_list/index',
     'pages/order_detail/index'
   ],
   window: {

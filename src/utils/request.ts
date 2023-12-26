@@ -18,6 +18,7 @@ export interface Response<T> {
 }
 
 let cookie = ''
+const appId = Taro.getAccountInfoSync().miniProgram.appId
 
 const cookieParse = (val: string) => {
   return val.replace(/(path=\/,|expires=.*?GMT; Max-Age=\d+; path=\/)/g, '');
@@ -32,17 +33,27 @@ export default function request<T = any>(api: string, data: any, loading: boolea
   }
   
   const url = settings.baseUrl + api
-  const header:any = { 
-    'Content-type': 'application/json',
-    'token': useUserStore().getToken()
-  };
 
   // if (userStore.openType > 0) data.inType = userStore.openType
 
-  //@ts-ignore
-  data.machine_id = useCommonStore().machineId
+  if (useCommonStore().machineId > 0) {
+    data.machine_id = useCommonStore().machineId
+  } else {
+    data.app_id = appId
+  }
 
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
+
+    const tokenWhiteList = ['/miniprogram/wx/code2Session']
+    let token = ''
+    if (!tokenWhiteList.includes(api)) {
+      token = await useUserStore().getToken()
+    }
+    const header:any = { 
+      'Content-type': 'application/json',
+      'token': token
+    };
+
     Taro.request<Response<T>>({
       url,
       data,

@@ -119,3 +119,16 @@ export function getLocation (): Promise<Taro.getLocation.SuccessCallbackResult> 
     })  
   })
 }
+
+/**
+ * 找出 options 中的label
+ * @param value 
+ * @param arr 
+ * @returns 
+ */
+export const findOptionsLabel = (value: number, arr: { label: string, value: number }[]) => {
+  for (const item of arr) {
+    if (item.value === value) return item.label
+  }
+  return ''
+}
