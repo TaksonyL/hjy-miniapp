@@ -36,6 +36,7 @@ page {
 .bg-color-back { background-color: $color-back; }
 .bg-color-main { background-color: $color-main; }
 .bg-color-white { background-color: $color-white; }
+.bg-color-success { background-color: $color-success; }
 
 .border-b { border-bottom: 1px solid #e5e5e5; }
 
@@ -48,6 +49,7 @@ page {
 .px { padding-left: 30px;padding-right: 30px; }
 .py { padding-top: 30px;padding-bottom: 30px; }
 .py-sm { padding-top: 20px;padding-bottom: 20px; }
+.mx-auto { margin: 0 auto; }
 
 // 安全距离
 .safe-b {

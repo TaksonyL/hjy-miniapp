@@ -6,9 +6,9 @@
       <image style="width: 60vw;" src="@/assets/charge.png" mode="widthFix" />
     </view>
 
-    <view v-if="rule" class="rent-wrap bg-color-white px shadow-t">
+    <view class="rent-wrap bg-color-white px shadow-t">
       <view class="safe-b">
-        <view class="text-sm" style="padding-bottom: 20px;padding-top: 10px;">
+        <view v-if="rule" class="text-sm" style="padding-bottom: 20px;padding-top: 10px;">
           <view class="text-justify" style="margin-bottom: 15px;color: #777;">
             {{ rule.desc }}
           </view>
@@ -49,12 +49,33 @@ import Taro from '@tarojs/taro';
 import { ref } from 'vue';
 import { GetLeaseRule } from '@/types/api';
 import { createOrder, payScoreOrder } from '@/api/order';
+import { useCommonStore } from '@/store/common';
 
+const commonStore = useCommonStore()
 const rent = () => {
   createOrder({}).then(res => {
-    console.log('test ===', res)
+    commonStore.orderId = res.data.pbo_id
     payScoreOrder({}).then(res => {
       console.log('test ===', res)
+      const { payScore } = res.data
+      Taro.navigateToMiniProgram({
+        appId: 'wxd8f3793ea3b935b8',
+        path: 'pages/use/use',
+        extraData: {
+          mch_id: payScore.extraData.mch_id,
+          package: payScore.package,
+          timestamp: payScore.extraData.timestamp.toString(),
+          nonce_str: payScore.extraData.nonce_str,
+          sign_type: payScore.extraData.sign_type,
+          sign: payScore.extraData.sign
+        },
+        fail(err) {
+          Taro.showToast({
+            title: err.errMsg,
+            icon: 'none'
+          })
+        }
+      })
     })
     // Taro.redirectTo({
     //   url: '/pages/charge_loading/index'
@@ -69,6 +90,19 @@ const getRule = () => {
   })
 }
 getRule()
+
+// const queryOrderStatus = () => {
+//   listenScoreOrder({ pbo_id: orderId }).then(res => {
+//     console.log('order result ===', res)
+//   })
+// }
+
+// useDidShow((res) => {
+//   console.log('show ===', res)
+//   if (res?.scene === 1038) {
+//     queryOrderStatus();
+//   }
+// })
 </script>
 
 <style lang="scss">

@@ -17,9 +17,12 @@
 import { listenScoreOrder } from '@/api/order';
 import Navbar from '@/components/Navbar/index.vue'
 import usePollingTask from '@/hooks/usePollingTask';
+import Taro from '@tarojs/taro';
+import { useLoad } from '@tarojs/taro';
 import { ref } from 'vue';
 
 const progressValue = ref(0)
+let orderId = 0
 
 const progressPolling = usePollingTask(async () => {
   if (progressValue.value >= 80) return false
@@ -28,14 +31,27 @@ const progressPolling = usePollingTask(async () => {
 }, { delay: 500 })
 
 usePollingTask(async () => {
-  const res = await listenScoreOrder({ pbo_id: 3 })
+  const res = await listenScoreOrder({ pbo_id: orderId })
   console.log('result ===', res)
-  if (res.data.status === 2) {
+  if (res.data.pbo.status === 2) {
     progressPolling.clearTask()
     progressValue.value = 100
+
+    setTimeout(() => {
+      Taro.redirectTo({
+        url: '/pages/charge_status/index?id=' + orderId
+      })
+    }, 1000);
+
     return false
   }
   return true
+})
+
+useLoad((options) => {
+  if (options.id) {
+    orderId = options.id
+  }
 })
 </script>
 

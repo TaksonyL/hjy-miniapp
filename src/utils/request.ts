@@ -18,7 +18,6 @@ export interface Response<T> {
 }
 
 let cookie = ''
-const appId = Taro.getAccountInfoSync().miniProgram.appId
 
 const cookieParse = (val: string) => {
   return val.replace(/(path=\/,|expires=.*?GMT; Max-Age=\d+; path=\/)/g, '');
@@ -36,10 +35,11 @@ export default function request<T = any>(api: string, data: any, loading: boolea
 
   // if (userStore.openType > 0) data.inType = userStore.openType
 
-  if (useCommonStore().machineId > 0) {
-    data.machine_id = useCommonStore().machineId
+  const commonStore = useCommonStore()
+  if (commonStore.machineId > 0) {
+    data.machine_id = commonStore.machineId
   } else {
-    data.app_id = appId
+    data.app_id = commonStore.getAppId()
   }
 
   return new Promise(async (resolve, reject) => {

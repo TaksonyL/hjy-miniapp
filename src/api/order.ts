@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { CreateOrder, CreateFreeOrder, ListenScoreOrder, ListenFreeOrder, GetOrderList, RequestPageData, ResponsePageData, GetOrderDetail } from '@/types/api'
+import { CreateOrder, CreateFreeOrder, ListenScoreOrder, ListenFreeOrder, GetOrderList, RequestPageData, ResponsePageData, GetOrderDetail, PayScoreOrder } from '@/types/api'
 
 /**
  * 创建支付分订单
@@ -16,7 +16,7 @@ export function createOrder (data: any) {
  * @returns 
  */
 export function payScoreOrder (data) {
-  return request('/miniprogram/order/payScore', data)
+  return request<PayScoreOrder.Response>('/miniprogram/order/payScore', data)
 }
 
 /**

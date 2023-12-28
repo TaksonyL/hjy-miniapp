@@ -4,6 +4,7 @@ export default defineAppConfig({
     'pages/login/index',
     'pages/charge_rent/index',
     'pages/charge_loading/index',
+    'pages/charge_status/index',
     'pages/official_subscribe/index',
     'pages/official_article/index',
     'pages/official_share/index',

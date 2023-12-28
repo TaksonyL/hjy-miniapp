@@ -59,10 +59,35 @@ export interface Order {
   rule_content: string
 }
 
+// 支付分订单
+export interface OrderScore {
+  appid: string
+  mchid: string
+  service_id: string
+  out_order_no: string
+  package: string
+  extraData: {
+    mch_id: string
+    nonce_str: string
+    out_order_no: string
+    service_id: string
+    sign: string
+    sign_type: string
+    timestamp: number
+  }
+}
+
 export namespace CreateOrder {
   export interface Response {
     pbo_id: number
     name: string
+  }
+}
+
+export namespace PayScoreOrder {
+  export interface Response {
+    payScore: OrderScore
+    pbo: Order
   }
 }
 
@@ -72,7 +97,14 @@ export namespace ListenScoreOrder {
   }
 
   export interface Response {
-    status: 1 | 2 | 3
+    pbo: {
+      pbo_id: number
+      trade_no: string
+      lease_machine_code: string
+      pb_number: string
+      status: 1 | 2 | 3
+      state_description: string
+    }
   }
 }
 
