@@ -4,6 +4,8 @@
 
     <view class="order-list px pt text-sm">
       
+      <nut-empty v-if="data.length === 0" description="暂无订单数据！"></nut-empty>
+
       <view v-for="(item, index) in data" :key="index"
        class="order-item bg-color-white rounded-sm"
        @tap="goDetail(item.pbo_id)">

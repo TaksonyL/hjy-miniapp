@@ -18,7 +18,7 @@
           </view>
           <view class="detail-cell">
             <view>下单时间</view>
-            <view>{{ getDateFormt(data.pay_time) }}</view>
+            <view>{{ getDateFormt(data.order_time) }}</view>
           </view>
           <view class="detail-cell">
             <view>租借设备</view>

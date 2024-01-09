@@ -57,6 +57,7 @@ export interface Order {
   return_time: number
   pb_number: string
   rule_content: string
+  order_time: number
 }
 
 // 支付分订单
