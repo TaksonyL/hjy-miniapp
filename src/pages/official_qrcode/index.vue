@@ -8,12 +8,12 @@
         <view>正在等待跳转</view>
       </template>
       <template v-else>
-        <view>关注公众号</view>
+        <view>长按关注公众号</view>
         <view>获得免费领取资格</view>
       </template>
     </view>
     <view v-if="!isQuota" class="qrcode-wrap">
-      <ImgWrap :src="qrcode" :is-prefix="false" />
+      <ImgWrap :src="qrcode" :is-prefix="false" :showMenuByLongpress="true" />
     </view>
   </view>
 </template>

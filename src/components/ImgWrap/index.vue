@@ -1,5 +1,5 @@
 <template>
-  <image v-if="!isError" :src="imgSrc" style="width: 100%; height: 100%;" :mode="mode" @error="onError"></image>
+  <image v-if="!isError" :src="imgSrc" style="width: 100%; height: 100%;" :mode="mode" :show-menu-by-longpress="showMenuByLongpress" @error="onError"></image>
   <image v-else :src="default" style="width: 100%; height: 100%;" :mode="mode" @error="onError"></image>
 </template>
 
@@ -12,13 +12,15 @@ export interface Props {
   src: string
   isPrefix?: boolean
   mode?: 'widthFix' | 'heightFix' | 'scaleToFill' | 'aspectFit' | 'aspectFill'
-  default?: string
+  default?: string,
+  showMenuByLongpress?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isPrefix: true,
   mode: 'aspectFit',
-  default: defaultImg
+  default: defaultImg,
+  showMenuByLongpress: false
 })
 
 const isError = ref(false)
