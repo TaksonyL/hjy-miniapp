@@ -58,9 +58,8 @@ const rent = () => {
     payScoreOrder({}).then(res => {
       console.log('test ===', res)
       const { payScore } = res.data
-      Taro.navigateToMiniProgram({
-        appId: 'wxd8f3793ea3b935b8',
-        path: 'pages/use/use',
+      Taro.openBusinessView({
+        businessType: 'wxpayScoreUse',
         extraData: {
           mch_id: payScore.extraData.mch_id,
           package: payScore.package,
