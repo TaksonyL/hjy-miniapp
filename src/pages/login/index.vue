@@ -8,11 +8,11 @@
         <image src="@/assets/icon-charge-pal.png" mode="heightFix" />
         <view>充电宝租借</view>
       </view>
-      <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow"
+      <!-- <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow"
         @click="goPage('/pages/official_qrcode/index')">
         <image src="@/assets/icon-gift.png" mode="heightFix" />
         <view>免费领取礼品</view>
-      </view>  
+      </view>   -->
     </view>
   </view>
 </template>

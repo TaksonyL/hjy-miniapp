@@ -38,7 +38,7 @@
           </view>
           <view class="detail-cell">
             <view>使用计费</view>
-            <view class="text-right">{{ rules }}</view>
+            <view class="text-right text-justify">{{ rules }}</view>
           </view>
 
           <view class="border-b" style="height: 20px;"></view>
@@ -72,7 +72,8 @@ let id = 0
 const rules = computed(() => {
   try {
     const ctx = JSON.parse(data.value.rule_content)
-    return `每${ctx.cycle}天周期内，可获得${ctx.free_duration}小时免费时间${ctx.free_times > 1 ? `（${ctx.free_times}次）`:"" }，${Number(ctx.overdue_amount)}元/${ctx.overdue_cycle}小时，每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元。`
+    // return `每${ctx.cycle}天周期内，可获得${ctx.free_duration}小时免费时间${ctx.free_times > 1 ? `（${ctx.free_times}次）`:"" }，${Number(ctx.overdue_amount)}元/${ctx.overdue_cycle}小时，每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元。`
+    return `每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元`
   } catch {
     return '--'
   }
@@ -101,7 +102,7 @@ useLoad((options) => {
       width: 120px;
     }
     view:nth-child(2) {
-      max-width: 480px;
+      max-width: 440px;
     }
   }
 }
