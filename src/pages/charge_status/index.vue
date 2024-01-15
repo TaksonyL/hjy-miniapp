@@ -92,7 +92,7 @@ useLoad((options) => {
 <style lang="scss">
 .order-status-container {
   .status-wrap {
-    width: 500px;
+    width: 600px;
     margin: 20vh auto 0;
     padding-top: 120px;
     padding-bottom: 60px;
