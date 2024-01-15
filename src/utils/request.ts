@@ -94,6 +94,10 @@ export default function request<T = any>(api: string, data: any, loading: boolea
       },
       fail (err) {
         if (loading) Taro.hideLoading()
+        Taro.showToast({
+          title: err.errMsg,
+          icon: 'none'
+        })
         reject(err)
       }
     })

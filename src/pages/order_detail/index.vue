@@ -73,13 +73,14 @@ const rules = computed(() => {
   try {
     const ctx = JSON.parse(data.value.rule_content)
     // return `每${ctx.cycle}天周期内，可获得${ctx.free_duration}小时免费时间${ctx.free_times > 1 ? `（${ctx.free_times}次）`:"" }，${Number(ctx.overdue_amount)}元/${ctx.overdue_cycle}小时，每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元。`
-    return `每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元`
+    return `${Number(ctx.overdue_amount)}元/${ctx.overdue_cycle}小时，每${ctx.cycle *24}小时封顶${Number(ctx.charge_limit)}元，总封顶${Number(ctx.charge_limit_continuous)}元`
   } catch {
     return '--'
   }
 })
 
 useLoad((options) => {
+  options.id = 140;
   if (options.id) {
     id = Number(options.id)
     getData({ pbo_id: id })
