@@ -66,6 +66,9 @@ useDidShow(() => {
   // 进入时检查免费领取额度
   getFreeQuota({}).then(res => {
     console.log('quota ===', res)
+    Taro.redirectTo({
+      url: '/pages/goods_list/index'
+    })
   })
 })
 </script>

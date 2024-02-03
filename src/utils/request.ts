@@ -63,7 +63,7 @@ export default function request<T = any>(api: string, data: any, loading: boolea
         if (loading) Taro.hideLoading()
         if (res.header['Set-Cookie']) cookie = cookieParse(res.header['Set-Cookie'])
 
-        if (res.statusCode !== 200) {
+        if (res.statusCode !== 200 || !res.data.state) {
           Taro.showToast({
             title: '网络错误',
             icon: 'none'

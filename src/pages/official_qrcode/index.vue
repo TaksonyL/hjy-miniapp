@@ -27,6 +27,7 @@ import { ref } from 'vue';
 import { getFreeQuota } from '@/api/order';
 import Taro from '@tarojs/taro';
 import { useUserStore } from '@/store/user';
+import { showModel } from '@/utils';
 
 const userStore = useUserStore()
 const isQuota = ref(false)    // 是否有免费领取资格
@@ -41,8 +42,14 @@ useDidShow(() => {
   }).catch(() => {
     if (userStore.userInfo && userStore.userInfo?.of_subscrible === 1) {
       // 已关注过
-      Taro.redirectTo({
-        url: '/pages/official_subscribe/index'
+      // Taro.redirectTo({
+      //   url: '/pages/official_subscribe/index'
+      // })
+      showModel({
+        content: '暂无免费额度',
+        success() {
+          Taro.navigateBack()
+        }
       })
     } else {
       // 未关注过

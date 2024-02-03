@@ -56,7 +56,7 @@ const numMinus = () => {
 
 const numChange = throttle((number: number) => {
   emit('numChange', number)
-})
+}, 300)
 </script>
 
 <style lang="scss">

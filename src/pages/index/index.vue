@@ -5,10 +5,10 @@
     <map
       v-if="mapShow"
       id="map"
-      style="width: 100vw; height: 300vh;"
+      style="width: 100vw; height: 100vh;"
       :longitude="mapOptions.lon"
       :latitude="mapOptions.lat"
-      scale="14"
+      scale="12"
       :markers="mapMarkers"
       :show-location="true"
     />

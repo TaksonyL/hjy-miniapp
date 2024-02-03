@@ -3,14 +3,14 @@
     <Navbar title="确认订单" />
 
     <view class="cell-group">
-      <Cell label="设备编号" text="123456" :border="true" />
-      <Cell label="订单时间" text="121212" />
+      <Cell label="设备编号" :text="commonStore.machineCode" :border="true" />
+      <Cell label="订单时间" :text="time" />
     </view>
 
     <view class="cell-group bg-color-white" style="padding-bottom: 10px;">
       <Cell label="商品列表" :border="true" />
       <goodsItem v-for="(item, index) in cartStore.cartList" :key="index"
-        :item="item" />
+        :item="item" @num-change="(num) => onGoodsNumChange(item.id, num)" @del="onGoodsDel(item.id)" />
     </view>
 
     <view class="toolbar-block"></view>
@@ -31,9 +31,13 @@ import Cell from './cell.vue'
 import { useCartStore } from '@/store/cart';
 import { createFreeOrder } from '@/api/order';
 import Taro from '@tarojs/taro';
+import { useCommonStore } from '@/store/common';
+import { getDateFormt } from '@/utils'
 
 const cartStore = useCartStore()
+const commonStore = useCommonStore()
 
+const time = getDateFormt();
 const submit = () => {
   const cart = cartStore.cartList.map(item => {
     return {
@@ -44,12 +48,32 @@ const submit = () => {
   createFreeOrder({
     goodsList: cart
   }).then(res => {
-    console.log('order ===', res)
     cartStore.cartClear()
     Taro.redirectTo({
-      url: '/pages/order_status/index'
+      url: '/pages/order_status/index?id=' + res.data.order_id
     })
   })
+}
+
+const onGoodsNumChange = (id: number, num: number) => {
+  cartStore.cartNum(id, num)
+}
+
+const onGoodsDel = (id: number) => {
+  cartStore.cartDel(id)
+  console.log('len ===', cartStore.cartLen)
+  if (cartStore.cartLen === 0) {
+    Taro.showToast({
+      title: "商品已清空",
+      icon: 'none',
+      duration: 2000,
+      success() {
+        setTimeout(() => {
+          Taro.navigateBack()
+        }, 1000)
+      }
+    })
+  }
 }
 </script>
 

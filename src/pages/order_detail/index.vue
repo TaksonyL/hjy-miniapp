@@ -5,7 +5,6 @@
     <view class="px py">
       <view class="bg-color-white rounded px">
         <view class="py-sm flex-between border-b">
-          <!-- <view>租借中</view> -->
           <Tag :value="data.status" :options="orderStatusOptions" plain />
           <view class="text-bold">产生费用：¥ {{ data.amount }}</view>
         </view>
@@ -49,9 +48,14 @@
           </view>
           <view class="text-right">合计：<text class="text-bold">¥ {{ data.amount }}</text></view>
           <view style="height: 20px;"></view>
-          
         </view>
       </view>
+
+      <view class="text-center text-color-danger text-lg" style="margin-top: 20px;" @tap="call">
+        <view>客服电话</view>
+        <view>{{ data.service_phone }}</view>
+      </view>
+
     </view>
   </view>
 </template>
@@ -65,6 +69,7 @@ import { useLoad } from '@tarojs/taro';
 import { getDateFormt } from '@/utils'
 import { orderStatusOptions, payTypeOptions } from '@/types/api';
 import { computed } from 'vue';
+import Taro from '@tarojs/taro';
 
 const { data, getData } = useRequest(getOrderDetail)
 let id = 0
@@ -79,8 +84,13 @@ const rules = computed(() => {
   }
 })
 
+const call = () => {
+  Taro.makePhoneCall({
+    phoneNumber: '15207634974'
+  })
+}
+
 useLoad((options) => {
-  options.id = 140;
   if (options.id) {
     id = Number(options.id)
     getData({ pbo_id: id })

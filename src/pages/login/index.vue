@@ -8,11 +8,11 @@
         <image src="@/assets/icon-charge-pal.png" mode="heightFix" />
         <view>充电宝租借</view>
       </view>
-      <!-- <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow"
+      <view class="btn-item text-color-white bg-color-main flex-center flex-col shadow"
         @click="goPage('/pages/official_qrcode/index')">
         <image src="@/assets/icon-gift.png" mode="heightFix" />
         <view>免费领取礼品</view>
-      </view>   -->
+      </view>  
     </view>
   </view>
 </template>
@@ -25,7 +25,7 @@ import { useCommonStore } from '@/store/common';
 import { useUserStore } from '@/store/user';
 import { MachineInfo } from '@/types';
 import { showModel } from '@/utils';
-import Taro, { useLoad } from '@tarojs/taro';
+import Taro, { useDidShow, useLoad } from '@tarojs/taro';
 import { ref } from 'vue';
 
 const userStore = useUserStore()
@@ -43,6 +43,7 @@ const getMachineData = () => {
     machineInfo.value = res.data
     cartStore.cartLimit = res.data.machine_car_limit
     cartStore.channelLimit = res.data.machine_channel_limit
+    commonStore.machineCode = res.data.machine_code
     getLocation()
   })
 }
@@ -116,6 +117,10 @@ useLoad((options) => {
       }
     })
   }
+})
+
+useDidShow(() => {
+  cartStore.cartClear()
 })
 </script>
 

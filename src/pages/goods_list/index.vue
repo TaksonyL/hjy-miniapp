@@ -10,7 +10,8 @@
     <view class="px flex-between flex-wrap" style="padding-top: 15px;">
 
       <goods v-for="(item, index) in goodslist" :key="index"
-        :item="item" @cart-add="cartAdd(index)" />
+        :item="item" :sell-out="item.stock === 0" :error="item.channel_status !== 1"
+        @cart-add="cartAdd(index)" />
 
     </view>
 
@@ -58,16 +59,21 @@ import { useCartStore } from '@/store/cart';
 import Taro from '@tarojs/taro';
 import { getChannelList } from '@/api/machine';
 
-const goodslist = ref<GoodsItem[]>([])
+interface GoodsChannel extends GoodsItem {
+  channel_status: number
+}
+
+const goodslist = ref<GoodsChannel[]>([])
 
 const getData = () => {
   getChannelList({}).then(res => {
     // console.log('channel list ===', res)
     goodslist.value = res.data.map(item => ({
       id: item.channel_id,
-      name: item.channel_goods_name,
-      img: item.channel_goods_pic,
-      stock: item.channel_stock
+      name: item.channel_goods_name ?? '',
+      img: item.channel_goods_pic ?? '',
+      stock: item.channel_stock,
+      channel_status: item.channel_status
     }))
   })
 }

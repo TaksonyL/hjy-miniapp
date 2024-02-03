@@ -5,6 +5,7 @@ import { ref } from "vue";
 export const useCommonStore = defineStore("common", () => {
   const scene = ref(0)
   const machineId = ref(0)
+  const machineCode = ref('')
   const appId = ref('')
   const orderId = ref(0)   // 正在租借订单
 
@@ -18,6 +19,7 @@ export const useCommonStore = defineStore("common", () => {
   return {
     scene,
     machineId,
+    machineCode,
     orderId,
 
     getAppId

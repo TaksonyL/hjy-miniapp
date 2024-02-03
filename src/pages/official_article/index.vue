@@ -46,7 +46,7 @@ useLoad(() => {
 })
 
 const goShow = () => {
-  Taro.navigateTo({
+  Taro.redirectTo({
     url: `/pages/official_share/index?id=${shareInfo.id}&title=${shareInfo.title}&img=${encodeURIComponent(shareInfo.img)}&url=${encodeURIComponent(webUrl.value)}`
   })
 }

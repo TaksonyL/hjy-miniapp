@@ -48,7 +48,7 @@ import Navbar from '@/components/Navbar/index.vue'
 import Taro from '@tarojs/taro';
 import { ref } from 'vue';
 import { GetLeaseRule } from '@/types/api';
-import { createOrder, payScoreOrder } from '@/api/order';
+import { createOrder, listenScoreOrder, payScoreOrder } from '@/api/order';
 import { useCommonStore } from '@/store/common';
 
 const commonStore = useCommonStore()
@@ -68,11 +68,41 @@ const rent = () => {
           sign_type: payScore.extraData.sign_type,
           sign: payScore.extraData.sign
         },
-        fail(err) {
-          Taro.showToast({
-            title: err.errMsg,
-            icon: 'none'
+        success() {
+          listenScoreOrder({ pbo_id: commonStore.orderId }, true).then(res => {
+            if (res.data.pbo.state_description === 'USER_CONFIRM') {
+              Taro.redirectTo({
+                url: '/pages/charge_loading/index?id=' + res.data.pbo.pbo_id
+              })
+            } else {
+              // showModel({
+              //   title: '温馨提示',
+              //   content: '获取免押失败，是否使用押金租借?',
+              //   showCancel: true,
+              //   success() {
+              //     payDeposiy({ pbo_id: commonStore.orderId }).then((payResult: any) => {
+              //       const payData = JSON.parse(payResult.data.pay)
+              //       Taro.requestPayment({
+              //         timeStamp: payData.timeStamp,
+              //         nonceStr: payData.nonceStr,
+              //         package: payData.package,
+              //         signType: payData.signType,
+              //         paySign: payData.paySign,
+              //         fail() {
+              //           Taro.showToast({
+              //             title: '支付失败',
+              //             icon: 'none'
+              //           })
+              //         }
+              //       })
+              //     })
+              //   }
+              // })
+            }
           })
+        },
+        fail(err) {
+          console.log('err ===', err)
         }
       })
     })

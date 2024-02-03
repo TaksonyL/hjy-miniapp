@@ -33,13 +33,15 @@ export const refundStatusOptions = [
 export enum OrderStatusEnums {
   UNSTART = 1,
   PENDING = 2,
-  FINISH = 3
+  FINISH = 3,
+  INVALID = 9,
 }
 
 export const orderStatusOptions = [
   { label: '未开始', value: OrderStatusEnums.UNSTART, type: 'info' },
   { label: '租借中', value: OrderStatusEnums.PENDING, type: 'warning' },
-  { label: '已归还', value: OrderStatusEnums.FINISH, type: 'success' }
+  { label: '已归还', value: OrderStatusEnums.FINISH, type: 'success' },
+  { label: '无效订单', value: OrderStatusEnums.INVALID, type: 'info' }
 ]
 
 export interface Order {
@@ -58,6 +60,7 @@ export interface Order {
   pb_number: string
   rule_content: string
   order_time: number
+  service_phone: string
 }
 
 // 支付分订单
@@ -117,7 +120,9 @@ export namespace CreateFreeOrder {
     }[]
   }
 
-  export interface Response {}
+  export interface Response {
+    order_id: number
+  }
 }
 
 export namespace ListenFreeOrder {

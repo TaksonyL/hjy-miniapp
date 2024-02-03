@@ -24,8 +24,17 @@ export function payScoreOrder (data) {
  * @param data 
  * @returns 
  */
-export function listenScoreOrder (data: ListenScoreOrder.Options) {
-  return request<ListenScoreOrder.Response>('/miniprogram/order/monitorPbo', data, false)
+export function listenScoreOrder (data: ListenScoreOrder.Options, loading:boolean = false) {
+  return request<ListenScoreOrder.Response>('/miniprogram/order/monitorPbo', data, loading)
+}
+
+/**
+ * 发起押金支付
+ * @param data 
+ * @returns 
+ */
+export function payDeposiy (data) {
+  return request('/miniprogram/order/payPbo', data)
 }
 
 /**

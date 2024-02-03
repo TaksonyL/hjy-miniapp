@@ -7,6 +7,7 @@ export interface GoodsItem {
 
 // 设备信息
 export interface MachineInfo {
+  machine_code: string
   machine_id: number
   machine_lat: string
   machine_lon: string
@@ -20,7 +21,7 @@ export interface Channel {
   channel_id: number
   channel_code: string
   channel_stock: number
-  channel_status: 1
+  channel_status: 0 | 1 | 2 | 3 | 4
   channel_goods_name: string
   channel_goods_pic: string
 }
