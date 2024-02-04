@@ -14,6 +14,7 @@ export interface MachineInfo {
   machine_name: string
   machine_car_limit: number
   machine_channel_limit: number
+  machine_service_phone: string
 }
 
 // 货道信息

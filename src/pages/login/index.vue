@@ -12,7 +12,12 @@
         @click="goPage('/pages/official_qrcode/index')">
         <image src="@/assets/icon-gift.png" mode="heightFix" />
         <view>免费领取礼品</view>
-      </view>  
+      </view>
+
+      <view v-if="machineInfo?.machine_service_phone" class="text-center text-color-danger" style="margin-top: 50px;">
+        <view>服务电话</view>
+        <view class="text-bold text-lg">{{ machineInfo?.machine_service_phone }}</view>
+      </view>
     </view>
   </view>
 </template>
