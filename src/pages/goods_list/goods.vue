@@ -6,7 +6,7 @@
         <image src="@/assets/break.png" mode="widthFix" />
       </view>
       <view v-else-if="sellOut" class="goods-img-error flex-center">
-        <image src="@/assets/sale_out.png" mode="widthFix" />
+        <image src="@/assets/sale_out1.png" mode="widthFix" />
       </view>
     </view>
     <view class="leading text-base">{{ item.name }}</view>
