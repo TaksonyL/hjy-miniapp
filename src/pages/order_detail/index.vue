@@ -86,7 +86,7 @@ const rules = computed(() => {
 
 const call = () => {
   Taro.makePhoneCall({
-    phoneNumber: '15207634974'
+    phoneNumber: data.value.service_phone
   })
 }
 
